@@ -3,12 +3,12 @@ class Meal {
     id,
     categoryIds,
     title,
+    affordability,
+    complexity,
     imageUrl,
+    durations,
     ingredients,
     steps,
-    durations,
-    complexity,
-    affordability,
     isGlutenFree,
     isVegan,
     isVegeterian,
@@ -17,12 +17,12 @@ class Meal {
     this.id = id;
     this.categoryIds = categoryIds;
     this.title = title;
+    this.affordability = affordability;
+    this.complexity = complexity;
     this.imageUrl = imageUrl;
+    this.durations = durations;
     this.ingredients = ingredients;
     this.steps = steps;
-    this.durations = durations;
-    this.complexity = complexity;
-    this.affordability = affordability;
     this.isGlutenFree = isGlutenFree;
     this.isVegan = isVegan;
     this.isVegeterian = isVegeterian;

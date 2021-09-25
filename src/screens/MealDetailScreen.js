@@ -10,15 +10,32 @@ import {
   FlatList,
   Platform,
 } from "react-native";
+import { MEALS } from "../data/dummy-data";
 
 const MealDetailScreen = (props) => {
   const { navigation } = props;
 
+  const mealId = navigation.getParam("mealId");
+
+  const selectedMeal = MEALS.find((item) => item.id === mealId);
+
   return (
     <View style={styles.containerView}>
-      <Text style={styles.text}>MealDetailScreen</Text>
+      <Text style={styles.text}>{selectedMeal.title}</Text>
     </View>
   );
+};
+
+MealDetailScreen.navigationOptions = (props) => {
+  const { navigation } = props;
+
+  const mealId = navigation.getParam("mealId");
+
+  const selectedMeal = MEALS.find((item) => item.id === mealId);
+
+  return {
+    headerTitle: selectedMeal.title,
+  };
 };
 
 const styles = StyleSheet.create({

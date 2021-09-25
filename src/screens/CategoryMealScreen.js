@@ -10,6 +10,7 @@ import {
   FlatList,
   Platform,
 } from "react-native";
+import MealItem from "../components/MealItem";
 import { Colors } from "../constants";
 
 import { CATEGORIES, MEALS } from "../data/dummy-data";
@@ -36,9 +37,14 @@ const CategoryMealScreen = (props) => {
         // keyExtractor={key => key.id}
         renderItem={({ item }) => {
           return (
-            <View>
-              <Text>{item.title}</Text>
-            </View>
+            <MealItem
+              item={item}
+              onPress={() => {
+                navigation.navigate("MealDetail", {
+                  mealId: item.id,
+                });
+              }}
+            />
           );
         }}
       />
@@ -62,8 +68,6 @@ const styles = StyleSheet.create({
   containerView: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
   text: {
     fontSize: 20,
