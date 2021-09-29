@@ -10,27 +10,19 @@ import {
   FlatList,
   Platform,
 } from "react-native";
+import MealList from "../components/MealList";
+import { MEALS } from "../data/dummy-data";
 
 const FavoritesScreen = (props) => {
   const { navigation } = props;
 
-  return (
-    <View style={styles.containerView}>
-      <Text style={styles.text}>FavoritesScreen</Text>
-    </View>
-  );
+  const favMeals = MEALS.filter((meal) => meal.id === "m1" || meal.id === "m2");
+
+  return <MealList navigation={navigation} data={favMeals} />;
 };
 
-const styles = StyleSheet.create({
-  containerView: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    fontSize: 20,
-  },
-});
+FavoritesScreen.navigationOptions = {
+  headerTitle: "Your Favorites!",
+};
 
 export default FavoritesScreen;

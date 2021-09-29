@@ -19,40 +19,41 @@ const MealItem = ({ item, onPress }) => {
 
   return (
     <View style={styles.card}>
-      <View style={styles.root}>
-        <TouchableComponent style={{ flex: 1 }} onPress={onPress}>
-          <View style={{ flex: 1, height: "100%" }}>
-            <View style={styles.container}>
-              <ImageBackground
-                source={{ uri: item.imageUrl }}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  alignItems: "center",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <View style={styles.foot}>
-                  <Text style={styles.footText}>{item.title}</Text>
-                </View>
-              </ImageBackground>
-            </View>
-
-            <View style={styles.foot}>
-              <Text style={styles.footText}>{item.durations}</Text>
-              <Text style={styles.footText}>{item.complexity}</Text>
-              <Text style={styles.footText}>{item.affordability}</Text>
-            </View>
+      <TouchableComponent
+        style={{ flex: 1, borderRadius: 10, overflow: "hidden" }}
+        onPress={onPress}
+      >
+        <View style={styles.root}>
+          <View style={styles.container}>
+            <ImageBackground
+              source={{ uri: item.imageUrl }}
+              style={{
+                width: "100%",
+                height: "100%",
+                alignItems: "center",
+                justifyContent: "flex-end",
+              }}
+            >
+              <View style={styles.foot}>
+                <Text style={styles.footText}>{item.title}</Text>
+              </View>
+            </ImageBackground>
           </View>
-        </TouchableComponent>
-      </View>
+
+          <View style={styles.foot}>
+            <Text style={styles.footText}>{item.durations}</Text>
+            <Text style={styles.footText}>{item.complexity}</Text>
+            <Text style={styles.footText}>{item.affordability}</Text>
+          </View>
+        </View>
+      </TouchableComponent>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    shadowColor: "black",
+    shadowColor: "green",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 10,
@@ -62,6 +63,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "#ccc",
     justifyContent: "space-between",
+    overflow: Platform.OS === "android" ? "hidden" : "visible",
   },
   root: {
     flex: 1,
@@ -70,7 +72,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-
     borderRadius: 10,
   },
   foot: {

@@ -18,24 +18,22 @@ const CategoryGridItem = ({ item, onPress }) => {
 
   return (
     <View style={styles.containerView}>
-      <View style={{ overflow: "hidden", flex: 1, borderRadius: 5 }}>
-        <TouchableComponent style={styles.grid} onPress={onPress}>
-          <View
-            style={{
-              backgroundColor: item.color,
-              flex: 1,
-              borderRadius: 5,
-              justifyContent: "flex-end",
-              alignItems: "flex-end",
-              padding: 10,
-            }}
-          >
-            <Text numberOfLines={2} style={styles.text}>
-              {item.title}
-            </Text>
-          </View>
-        </TouchableComponent>
-      </View>
+      <TouchableComponent style={styles.grid} onPress={onPress}>
+        <View
+          style={{
+            backgroundColor: item.color,
+            flex: 1,
+            borderRadius: 5,
+            justifyContent: "flex-end",
+            alignItems: "flex-end",
+            padding: 10,
+          }}
+        >
+          <Text numberOfLines={2} style={styles.text}>
+            {item.title}
+          </Text>
+        </View>
+      </TouchableComponent>
     </View>
   );
 };
@@ -51,6 +49,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 5,
     elevation: 5,
+    overflow: Platform.OS === "android" ? "hidden" : "visible",
   },
   text: {
     fontSize: 20,

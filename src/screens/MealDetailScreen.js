@@ -12,6 +12,8 @@ import {
 } from "react-native";
 import { MEALS } from "../data/dummy-data";
 
+import HeaderButton from "../components/HeaderButton";
+
 const MealDetailScreen = (props) => {
   const { navigation } = props;
 
@@ -35,6 +37,7 @@ MealDetailScreen.navigationOptions = (props) => {
 
   return {
     headerTitle: selectedMeal.title,
+    headerRight: <HeaderButton onPress={() => {}} />,
   };
 };
 
