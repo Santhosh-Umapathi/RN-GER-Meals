@@ -23,6 +23,7 @@ const MealDetailScreen = (props) => {
   const mealId = navigation.getParam("mealId");
 
   const state = useSelector((state) => state.meals);
+
   const dispatch = useDispatch();
 
   const selectedMeal = state.meals.find((item) => item.id === mealId);
@@ -69,11 +70,16 @@ MealDetailScreen.navigationOptions = (props) => {
   const mealId = navigation.getParam("mealId");
   const toggleFavorite = navigation.getParam("toggleFavorite");
   const mealTitle = navigation.getParam("mealTitle");
+  const isFavorite = navigation.getParam("isFavorite");
+  console.log("🚀 --- ho isFavorite", isFavorite);
 
   return {
     headerTitle: mealTitle,
     headerRight: (
-      <HeaderButton onPress={toggleFavorite} iconName="star-outline" />
+      <HeaderButton
+        onPress={toggleFavorite}
+        iconName={isFavorite ? "ios-star" : "ios-star-outline"}
+      />
     ),
   };
 };

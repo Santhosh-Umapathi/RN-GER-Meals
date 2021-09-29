@@ -11,9 +11,11 @@ import {
   Platform,
   Switch,
 } from "react-native";
+import { useDispatch } from "react-redux";
 import FilterSwitch from "../components/FilterSwitch";
 import HeaderButton from "../components/HeaderButton";
 import { Colors } from "../constants";
+import * as actions from "../store/actions";
 
 const FilterScreen = (props) => {
   const { navigation } = props;
@@ -23,6 +25,8 @@ const FilterScreen = (props) => {
   const [isVegan, setIsVegan] = useState(false);
   const [isVegeterian, setIsVegeterian] = useState(false);
 
+  const dispatch = useDispatch();
+
   //Recreats function only when dependency changes
   const saveFilters = useCallback(() => {
     const appliedFilters = {
@@ -31,6 +35,8 @@ const FilterScreen = (props) => {
       vegan: isVegan,
       vegeterian: isVegeterian,
     };
+
+    dispatch(actions.setFilters(appliedFilters));
 
     console.log("APPLIED Filters", appliedFilters);
   }, [isGlutenFree, isLactoseFree, isVegan, isVegeterian]);
