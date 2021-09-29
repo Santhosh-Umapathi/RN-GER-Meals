@@ -31,9 +31,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
-  text: {
-    fontSize: 20,
-  },
 });
 
 export default MealList;

@@ -1,23 +1,13 @@
 import { Ionicons } from "@expo/vector-icons";
 
-import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  Button,
-  Image,
-  FlatList,
-  Platform,
-} from "react-native";
+import React from "react";
+import { Platform } from "react-native";
 import { Colors } from "../constants";
 
-const HeaderButton = ({ onPress = () => {} }) => {
+const HeaderButton = ({ onPress = () => {}, iconName = "" }) => {
   return (
     <Ionicons
-      name="star-outline"
+      name={iconName}
       size={25}
       color={Platform.OS === "android" ? "#fff" : Colors.primaryColor}
       style={{ paddingHorizontal: 10 }}
@@ -25,17 +15,5 @@ const HeaderButton = ({ onPress = () => {} }) => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-  containerView: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    fontSize: 20,
-  },
-});
 
 export default HeaderButton;

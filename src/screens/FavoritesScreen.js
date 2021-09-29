@@ -10,6 +10,7 @@ import {
   FlatList,
   Platform,
 } from "react-native";
+import HeaderButton from "../components/HeaderButton";
 import MealList from "../components/MealList";
 import { MEALS } from "../data/dummy-data";
 
@@ -21,8 +22,18 @@ const FavoritesScreen = (props) => {
   return <MealList navigation={navigation} data={favMeals} />;
 };
 
-FavoritesScreen.navigationOptions = {
-  headerTitle: "Your Favorites!",
+FavoritesScreen.navigationOptions = (props) => {
+  return {
+    headerTitle: "Your Favorites !",
+    headerLeft: (
+      <HeaderButton
+        iconName="ios-menu"
+        onPress={() => {
+          props.navigation.toggleDrawer();
+        }}
+      />
+    ),
+  };
 };
 
 export default FavoritesScreen;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
@@ -9,16 +9,84 @@ import {
   Image,
   FlatList,
   Platform,
+  Switch,
 } from "react-native";
+import FilterSwitch from "../components/FilterSwitch";
+import HeaderButton from "../components/HeaderButton";
+import { Colors } from "../constants";
 
 const FilterScreen = (props) => {
   const { navigation } = props;
 
+  const [isGlutenFree, setIsGlutenFree] = useState(false);
+  const [isLactoseFree, setIsLactoseFree] = useState(false);
+  const [isVegan, setIsVegan] = useState(false);
+  const [isVegeterian, setIsVegeterian] = useState(false);
+
+  const saveFilters = useCallback(() => {
+    const appliedFilters = {
+      glutenFree: isGlutenFree,
+      lactoseFree: isLactoseFree,
+      vegan: isVegan,
+      vegeterian: isVegeterian,
+    };
+
+    console.log("APPLIED Filters", appliedFilters);
+  }, [isGlutenFree, isLactoseFree, isVegan, isVegeterian]);
+
+  useEffect(() => {
+    navigation.setParams({ saveFilters });
+  }, [saveFilters]);
+
   return (
     <View style={styles.containerView}>
-      <Text style={styles.text}>FilterScreen</Text>
+      <Text style={styles.text}>Available Filters</Text>
+
+      <FilterSwitch
+        label="Gluten-Free"
+        state={isGlutenFree}
+        setState={setIsGlutenFree}
+      />
+
+      <FilterSwitch
+        label="Lactose-Free"
+        state={isLactoseFree}
+        setState={setIsLactoseFree}
+      />
+
+      <FilterSwitch label="Vegan" state={isVegan} setState={setIsVegan} />
+
+      <FilterSwitch
+        label="Vegeterian"
+        state={isVegeterian}
+        setState={setIsVegeterian}
+      />
     </View>
   );
+};
+
+FilterScreen.navigationOptions = (props) => {
+  const { navigation } = props;
+  return {
+    headerTitle: "Your Filters !",
+    headerLeft: (
+      <HeaderButton
+        iconName="ios-menu"
+        onPress={() => {
+          navigation.toggleDrawer();
+        }}
+      />
+    ),
+    headerRight: (
+      <HeaderButton
+        iconName="ios-save"
+        onPress={() => {
+          const save = navigation.getParam("saveFilters");
+          save();
+        }}
+      />
+    ),
+  };
 };
 
 const styles = StyleSheet.create({
@@ -26,7 +94,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
   },
   text: {
     fontSize: 20,
