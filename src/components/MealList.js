@@ -16,6 +16,7 @@ const MealList = (props) => {
               onPress={() => {
                 navigation.navigate("MealDetail", {
                   mealId: item.id,
+                  mealTitle: item.title,
                 });
               }}
             />
