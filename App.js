@@ -7,6 +7,10 @@ import AppLoading from "expo-app-loading";
 import MealsNavigator from "./src/navigation/MealsNavigator";
 
 import { useScreens } from "react-native-screens";
+import { createStore, combineReducers } from "redux";
+//Reducer
+import mealsReducer from "./src/store/reducers";
+import { Provider } from "react-redux";
 
 // useScreens();
 //Loading Customer fonts
@@ -20,6 +24,11 @@ const fetchFonts = (params) => {
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
 
+  const rootReducer = combineReducers({
+    meals: mealsReducer,
+  });
+  const store = createStore(rootReducer);
+
   //Splash Screen when fonts are loading
   if (!fontLoaded) {
     return (
@@ -31,14 +40,9 @@ export default function App() {
     );
   }
 
-  return <MealsNavigator />;
+  return (
+    <Provider store={store}>
+      <MealsNavigator />
+    </Provider>
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

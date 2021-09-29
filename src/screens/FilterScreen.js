@@ -23,6 +23,7 @@ const FilterScreen = (props) => {
   const [isVegan, setIsVegan] = useState(false);
   const [isVegeterian, setIsVegeterian] = useState(false);
 
+  //Recreats function only when dependency changes
   const saveFilters = useCallback(() => {
     const appliedFilters = {
       glutenFree: isGlutenFree,
